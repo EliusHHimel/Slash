@@ -113,7 +113,7 @@ fastify.post("/", function(request, reply) {
 });
 
 // Run the server and report out to the logs
-fastify.listen(process.env.PORT, '127.0.0.1', function(err, address) {
+fastify.listen(process.env.PORT, '0.0.0.0', function(err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
