@@ -15,16 +15,16 @@ const fastify = require("fastify")({
 
 
 // Setup our static files
-fastify.register(require("fastify-static"), {
+fastify.register(require("@fastify/static"), {
   root: path.join(__dirname, "public"),
   prefix: "/" // optional: default '/'
 });
 
 // fastify-formbody lets us parse incoming forms
-fastify.register(require("fastify-formbody"));
+fastify.register(require("@fastify/formbody"));
 
 // point-of-view is a templating manager for fastify
-fastify.register(require("point-of-view"), {
+fastify.register(require("@fastify/view"), {
   engine: {
     handlebars: require("handlebars")
   }
@@ -113,7 +113,7 @@ fastify.post("/", function(request, reply) {
 });
 
 // Run the server and report out to the logs
-fastify.listen(process.env.PORT, '0.0.0.0', function(err, address) {
+fastify.listen({port:process.env.PORT, host:'0.0.0.0'}, function(err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
