@@ -63,7 +63,7 @@ fastify.get("/", function(request, reply) {
   }
   
   // The Handlebars code will be able to access the parameter values and build them into the page
-  reply.view("/src/pages/index.hbs", params);
+  return reply.view("/src/pages/index.hbs", params);
 });
 
 /**
@@ -109,7 +109,7 @@ fastify.post("/", function(request, reply) {
   }
   
   // The Handlebars template will use the parameter values to update the page with the chosen color
-  reply.view("/src/pages/index.hbs", params);
+  return reply.view("/src/pages/index.hbs", params);
 });
 
 // Run the server and report out to the logs
