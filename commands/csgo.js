@@ -15,22 +15,24 @@ module.exports = {
     ),
   async execute(interaction) {
     const steamid = interaction.options.getString('steamid');
-    const username = "steamid";
-    const baseURL = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=`;
-    const URL = baseURL + username;
+    console.log(steamid)
+    const username = steamid;
+    const baseURL64bit = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=${username}`;
 
-    let response = await fetch(`https://type.fit/api/quotes`);
-    let data = await response.json();
-    const randomQuoteIndex = Math.round(Math.random() * data.length);
-    const quote = data[randomQuoteIndex];
+    let response64bit = await fetch(baseURL);
+    let data64bit = await response.json();
+    
+    const steamID64bit = data64bit.response.steamid;
+    const 
+    
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setAuthor({
-        name: `~${quote.author}`,
+        name: `~${data.response.success}`,
       })
-      .setDescription(quote.text)
+      .setDescription(data.response.steamid)
       .setTimestamp();
 
     await interaction.reply({ embeds: [exampleEmbed] });
