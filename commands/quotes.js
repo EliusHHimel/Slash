@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder  } = require('discord.js');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 module.exports = {
@@ -8,6 +8,8 @@ module.exports = {
 	async execute(interaction) {
     let response = await fetch(`https://type.fit/api/quotes`);
     let data = await response.json()
-		await interaction.reply(data[0].text);
+    const randomQuoteIndex = Math.round(Math.random()*data.length);
+    const quote = data[randomQuoteIndex];
+		await interaction.reply(`${quote.text} \n ~${quote.author}`);
 	},
 };
