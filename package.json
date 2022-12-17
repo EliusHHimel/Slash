@@ -12,7 +12,8 @@
     "@fastify/view": "^7.3.0",
     "discord.js": "^14.7.1",
     "fastify": "^4.9.2",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "node-fetch": "^3.3.0"
   },
   "engines": {
     "node": "16.6.1"

@@ -1,12 +1,12 @@
 const { SlashCommandBuilder } = require('discord.js');
 
-
-const link = "https://type.fit/api/quotes";
-fetch(link)
-.then(response => response.json())
-.then(data => {
-    const randomQuoteIndex = Math.round(Math.random()*data.length);
-        (data[randomQuoteIndex]);
-      });
-
-
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('quotes')
+		.setDescription('Gives a random quotes!'),
+	async execute(interaction) {
+    let response = await fetch(`https://type.fit/api/quotes`);
+    let data = await response.json()
+		await interaction.reply(data[0].text);
+	},
+};
