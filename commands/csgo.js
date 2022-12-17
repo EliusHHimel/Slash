@@ -15,24 +15,29 @@ module.exports = {
     ),
   async execute(interaction) {
     const steamid = interaction.options.getString('steamid');
-    console.log(steamid)
     const username = steamid;
     const baseURL64bit = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=${username}`;
 
-    let response64bit = await fetch(baseURL);
-    let data64bit = await response.json();
+    const response64bit = await fetch(baseURL64bit);
+    const data64bit = await response64bit.json();
     
     const steamID64bit = data64bit.response.steamid;
-    const 
+    console.log(data64bit)
+    const csgoStatsURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${process.env.STEAM_KEY}&steamid=${steamID64bit}`
+    
+    const getCsgoStats = await fetch(csgoStatsURL);
+    const csgoStatsData = await getCsgoStats.json();
+    console.log(csgoStatsData)
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setAuthor({
-        name: `~${data.response.success}`,
+        name: `Players Stats`,
       })
-      .setDescription(data.response.steamid)
+      .setDescription('CS:GO Player Info')
+      .addFields({ name: csgoStatsData.playerstats.stats[0].name, value: csgoStatsData.playerstats.stats[0].value, inline: true })
       .setTimestamp();
 
     await interaction.reply({ embeds: [exampleEmbed] });
