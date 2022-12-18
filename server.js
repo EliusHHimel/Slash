@@ -2,8 +2,14 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const express = require('express');
+const cors = require('cors');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const token = process.env.TOKEN;
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -48,3 +54,16 @@ client.once(Events.ClientReady, c => {
 
 // Log in to Discord with your client's token
 client.login(token);
+
+app.get("/wakeup", function(request, response) {
+  console.log("i'm awake");
+  response.send("i'm awake")
+});
+
+app.get('/', (req, res) => {
+    res.send('Slash Server Running')
+})
+
+app.listen(5000, () => {
+    console.log('Running server on port', 5000)
+})

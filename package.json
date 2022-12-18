@@ -10,7 +10,9 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.6.0",
     "@fastify/view": "^7.3.0",
+    "cors": "^2.8.5",
     "discord.js": "^14.7.1",
+    "express": "^4.18.2",
     "fastify": "^4.9.2",
     "handlebars": "^4.7.7",
     "node-fetch": "^3.3.0"
