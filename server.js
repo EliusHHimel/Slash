@@ -27,9 +27,11 @@ for (const file of commandFiles) {
 		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
-client.user.setActivity('activity', { type: ActivityType.Listening });
+
 
 client.on(Events.InteractionCreate, async interaction => {
+  console.log(client.user)
+  client.user.setActivity('activity', { type: ActivityType.Listening, text: '/help' });
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
