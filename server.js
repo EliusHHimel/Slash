@@ -30,8 +30,7 @@ for (const file of commandFiles) {
 
 
 client.on(Events.InteractionCreate, async interaction => {
-  console.log(client.user)
-  client.user.setActivity('activity', { type: ActivityType.Listening, text: '/help' });
+  client.user.setActivity('/help', { type: ActivityType.Listening, name: "/help"});
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
