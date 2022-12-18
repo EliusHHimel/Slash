@@ -6,7 +6,7 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
-    console.log(client.ws)
-		await interaction.reply('Pong!' + client.latency);
+    console.log(client)
+		await interaction.reply(client.ws.shards);
 	},
 };
