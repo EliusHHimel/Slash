@@ -7,6 +7,6 @@ module.exports = {
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
     console.log(client)
-		await interaction.reply(client.ws.shards);
+		await interaction.reply("Ping Khuje pai na :3");
 	},
 };

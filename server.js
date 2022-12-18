@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const express = require('express');
 const cors = require('cors');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
 const token = process.env.TOKEN;
 
 const app = express();
@@ -27,6 +27,7 @@ for (const file of commandFiles) {
 		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
+client.user.setActivity('activity', { type: ActivityType.Listening });
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
