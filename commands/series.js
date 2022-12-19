@@ -15,12 +15,13 @@ module.exports = {
     .setDescription("Search for Series Information")
     .addStringOption((option) =>
       option
-        .setName("series_title")
-        .setDescription("Enter the title of the sereis you want to search for")
+        .setName("title")
+        .setDescription("Enter the title of the series you want to search for")
         .setRequired(true)
     ),
   async execute(interaction) {
-    const seriesTitle = interaction.options.getString("series_title");
+    const seriesTitle = interaction.options.getString('title');
+    console.log(interaction.options.getString('title'))
     const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=series&t=${seriesTitle}`;
 
     const getseriesData = await fetch(url);
