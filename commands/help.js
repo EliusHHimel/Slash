@@ -15,6 +15,7 @@ module.exports = {
     	.addFields(
 		    { name: 'Ping', value: "Run this command to see the bot ping \n ```/ping```"},
         { name: 'Movie', value: "Run this command to search a movie information \n ```/movie movie_title: Interstellar```" },
+        { name: 'Series', value: "Run this command to search a movie information \n ```/series series_title: Silicon Valley```" },
         { name: 'Quotes', value: "Run this command to get a random quotes \n ```/quotes```" },
         { name: 'CS:GO', value: "Run this command to see your CS:GO Stats \n ```/csgo steamid: officials1mple```" },
         { name: 'Server', value: "Run this command to see the server info \n ```/server```" },
