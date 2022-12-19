@@ -15,7 +15,7 @@ module.exports = {
     .setDescription("Search for Movie Information")
     .addStringOption((option) =>
       option
-        .setName("movie_title")
+        .setName("title")
         .setDescription("Enter the title of the movie you want to search for")
         .setRequired(true)
     )
@@ -29,11 +29,10 @@ module.exports = {
   async execute(interaction) {
     const title = interaction.options.getString("movie_title");
     const type = interaction.options.getString("type");
-    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=series&t=${title}`;
+    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=${type}&t=${title}`;
 
     const getMovieData = await fetch(url);
     const movieData = await getMovieData.json();
-    console.log(movieData)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
@@ -54,7 +53,7 @@ module.exports = {
         { name: 'Awards', value: movieData.Awards },
         { name: 'IMDB Rating', value: movieData.imdbRating, inline: true },
 		    { name: 'IMDB Votes', value: movieData.imdbVotes, inline: true },
-        { name: 'Box Office', value: movieData.BoxOffice, inline: true },
+        { name: 'Box Office', value: movieData.BoxOffice ? movieData.BoxOffice : 'N/A', inline: true },
 	)
       .setDescription(movieData.Plot)
       .setTimestamp()
