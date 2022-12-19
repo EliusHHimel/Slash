@@ -27,7 +27,7 @@ module.exports = {
     )
   ,
   async execute(interaction) {
-    const title = interaction.options.getString("movie_title");
+    const title = interaction.options.getString("title");
     const type = interaction.options.getString("type");
     const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=${type}&t=${title}`;
 
