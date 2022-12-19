@@ -25,15 +25,15 @@ module.exports = {
 
     const getMovieData = await fetch(url);
     const movieData = await getMovieData.json();
-    console.log(movieData);
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+    
     const movieRuntimeInt = parseInt(movieData.Runtime)
     const movieRuntime = `${Math.floor(movieRuntimeInt/60)} Hrs, ${movieRuntimeInt%60} Mins`
-    const exampleEmbed = new EmbedBuilder()
+    const movieEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-      .setImage(movieData.Poster)
+      .setThumbnail(movieData.Poster)
       .setTitle(movieData.Title)
     	.addFields(
 		    { name: 'Genre', value: movieData.Genre },
@@ -48,8 +48,9 @@ module.exports = {
         { name: 'Box Office', value: movieData.BoxOffice, inline: true },
 	)
       .setDescription(movieData.Plot)
-      .setTimestamp();
+      .setTimestamp()
+      .setFooter({ text: 'Slash', iconURL: 'https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png' });
 
-    await interaction.reply("```" + "My Latency:  " + "/ms" + "```");
+    await interaction.reply({ embeds: [movieEmbed] });
   },
 };
