@@ -15,8 +15,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const steamid = interaction.options.getString('steamid');
-    const username = steamid;
-    const baseURL64bit = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=${username}`;
+    const baseURL64bit = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=${steamid}`;
 
     const response64bit = await fetch(baseURL64bit);
     const data64bit = await response64bit.json();
