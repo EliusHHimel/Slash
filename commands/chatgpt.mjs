@@ -1,6 +1,6 @@
 const { Client, SlashCommandBuilder, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-import {ChatGPTAPIBrowser} from 'chatgpt'
+const {ChatGPTAPIBrowser} = require('chatgpt')
 
 module.exports = {
 	data: new SlashCommandBuilder()

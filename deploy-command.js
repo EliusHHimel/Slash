@@ -4,7 +4,7 @@ const token = process.env.TOKEN;
 const clientId = process.env.CLIENT_ID;
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js' && '.mjs'));
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const file of commandFiles) {
