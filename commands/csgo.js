@@ -28,13 +28,18 @@ module.exports = {
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+    
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setAuthor({
         name: `Players Stats`,
       })
-      .setDescription('CS:GO Player Info')
-      .addFields({ name: csgoStatsData.playerstats.stats[0].name, value: `${csgoStatsData.playerstats.stats[0].value}`, inline: true })
+      .setDescription("CS:GO Player Info")
+      .addFields({
+        name: csgoStatsData.playerstats.stats[0].name,
+        value: `${csgoStatsData.playerstats.stats[0].value}`,
+        inline: true,
+      })
       .setTimestamp(); 
 
     await interaction.reply({ embeds: [exampleEmbed] });
