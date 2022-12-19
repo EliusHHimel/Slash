@@ -1,27 +1,23 @@
-const {
-  Client,
-  SlashCommandBuilder,
-  GatewayIntentBits,
-  EmbedBuilder,
-} = require("discord.js");
+const { Client, SlashCommandBuilder, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
 const movieAPIKey = process.env.MOVIE_API_KEY;
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("series")
-    .setDescription("Search for Series Information")
+	data: new SlashCommandBuilder()
+		.setName('series')
+		.setDescription('Find your favourite series info')
     .addStringOption((option) =>
       option
         .setName("title")
         .setDescription("Enter the title of the series you want to search for")
         .setRequired(true)
     ),
-  async execute(interaction) {
-    const seriesTitle = interaction.options.getString('title');
-    console.log(interaction.options.getString('title'))
+	async execute(interaction) {
+   const seriesTitle = interaction.options.getString("title");
+    console.log(seriesTitle)
     const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=series&t=${seriesTitle}`;
 
     const getseriesData = await fetch(url);
@@ -51,5 +47,5 @@ module.exports = {
       .setFooter({ text: 'Slash', iconURL: 'https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png' });
 
     await interaction.reply({ embeds: [seriesEmbed] });
-  },
+	},
 };
