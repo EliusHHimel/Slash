@@ -29,10 +29,11 @@ module.exports = {
   async execute(interaction) {
     const title = interaction.options.getString("movie_title");
     const type = interaction.options.getString("type");
-    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=${type}&t=${title}`;
+    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=series&t=${title}`;
 
     const getMovieData = await fetch(url);
     const movieData = await getMovieData.json();
+    console.log(movieData)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
