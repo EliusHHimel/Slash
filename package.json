@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
+  "type": "module",
   "dependencies": {
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.6.0",
