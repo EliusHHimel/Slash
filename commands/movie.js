@@ -18,10 +18,18 @@ module.exports = {
         .setName("movie_title")
         .setDescription("Enter the title of the movie you want to search for")
         .setRequired(true)
-    ),
+    )
+  .addStringOption((option) =>
+      option
+        .setName("type")
+        .setDescription("Enter the type [movie, series, episode]")
+        .setRequired(true)
+    )
+  ,
   async execute(interaction) {
-    const movieTitle = interaction.options.getString("movie_title");
-    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&t=${movieTitle}`;
+    const title = interaction.options.getString("movie_title");
+    const type = interaction.options.getString("type");
+    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=${type}&t=${title}`;
 
     const getMovieData = await fetch(url);
     const movieData = await getMovieData.json();
