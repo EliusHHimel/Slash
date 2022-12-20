@@ -18,33 +18,27 @@ module.exports = {
         .setName("ip")
         .setDescription("Enter the server IP")
         .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("port")
-        .setDescription("Enter the type server port")
-        .setRequired(false)
     ),
   async execute(interaction) {
     const ip = interaction.options.getString("ip");
-    const port = interaction.options.getString("port");
-    const url = "https://api.mcsrvstat.us/2/"+ip+':'+ port ? port : '';
+    const url = "https://api.mcsrvstat.us/2/"+ip;
     const getServerStatus = await fetch(url);
     const serverData = await getServerStatus.json();
+    let image = new Image();
+    image.src = serverData.icon;
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
 
   const serverEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-      .setThumbnail(serverData.icon)
+      .setThumbnail(image)
       .setTitle('Server Status')
     	.addFields(
 		    { name: 'Status', value: serverData.online ? 'Online' : 'Offline' },
-		    { name: 'Players', value: serverData.players.online + '/' + serverData.players.max, inline: true },
-		    { name: 'Version', value: serverData.version },
+		    { name: 'Players', value: serverData.online ? serverData.players.online + '/' + serverData.players.max : 'N/A' },
+		    { name: 'Version', value: serverData.online ? serverData.version : 'N/A' },
 	)
-      .setDescription(movieData.Plot)
       .setTimestamp()
       .setFooter({ text: 'Slash', iconURL: 'https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png' });
 
