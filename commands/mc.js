@@ -24,16 +24,17 @@ module.exports = {
     const url = "https://api.mcsrvstat.us/2/"+ip;
     const getServerStatus = await fetch(url);
     const serverData = await getServerStatus.json();
-    let image = new Image();
-    image.src = serverData.icon;
+    
+    const sfbuff = new Buffer.from(serverData.icon.split(",")[1], "base64");
+    
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
 
   const serverEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-      .setThumbnail(image)
       .setTitle('Server Status')
+      // .setThumbnail(sfattach)
     	.addFields(
 		    { name: 'Status', value: serverData.online ? 'Online' : 'Offline' },
 		    { name: 'Players', value: serverData.online ? serverData.players.online + '/' + serverData.players.max : 'N/A' },
