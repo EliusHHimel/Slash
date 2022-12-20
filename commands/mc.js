@@ -31,7 +31,7 @@ module.exports = {
       .setColor(generateRandomHexColor())
       .setTitle("Minecraft Server Status")
       .setThumbnail(
-     "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png"
+     `https://api.minetools.eu/favicon/${ip}`
       )
       .addFields(
         { name: "Status", value: serverData.online ? "Online" : "Offline", inline: true },
