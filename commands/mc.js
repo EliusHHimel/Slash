@@ -29,7 +29,7 @@ module.exports = {
 
     const serverEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-      .setTitle("Server Status")
+      .setTitle("Minecraft Server Status")
       .setThumbnail(
      "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png"
       )
@@ -47,7 +47,7 @@ module.exports = {
         },
         {
           name: "Server IP",
-          value: serverData.online ? serverData.hostname : "N/A"
+          value: serverData.hostname
         },
       )
       .setTimestamp()
