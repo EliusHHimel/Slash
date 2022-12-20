@@ -37,19 +37,12 @@ module.exports = {
 
   const serverEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-      .setThumbnail(serverData.favicon)
+      .setThumbnail(serverData.icon)
       .setTitle('Server Status')
     	.addFields(
-		    { name: 'Genre', value: movieData.Genre },
-		    { name: 'Year', value: movieData.Year, inline: true },
-		    { name: 'Runtime', value: movieRuntime, inline: true },
-        { name: 'Director', value: movieData.Director, inline: true },
-        { name: 'Actors', value: movieData.Actors },
-        { name: 'Writer', value: movieData.Writer },
-        { name: 'Awards', value: movieData.Awards },
-        { name: 'IMDB Rating', value: movieData.imdbRating, inline: true },
-		    { name: 'IMDB Votes', value: movieData.imdbVotes, inline: true },
-        { name: 'Box Office', value: movieData.BoxOffice ? movieData.BoxOffice : 'N/A', inline: true },
+		    { name: 'Status', value: serverData.online ? 'Online' : 'Offline' },
+		    { name: 'Players', value: serverData.players.online + '/' + serverData.players.max, inline: true },
+		    { name: 'Version', value: serverData.version },
 	)
       .setDescription(movieData.Plot)
       .setTimestamp()
