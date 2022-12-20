@@ -27,14 +27,13 @@ module.exports = {
     
     const sfbuff = new Buffer.from(serverData.icon.split(",")[1], "base64");
     
-    
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
 
   const serverEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setTitle('Server Status')
-      // .setThumbnail(sfattach)
+      .setThumbnail(sfbuff)
     	.addFields(
 		    { name: 'Status', value: serverData.online ? 'Online' : 'Offline' },
 		    { name: 'Players', value: serverData.online ? serverData.players.online + '/' + serverData.players.max : 'N/A' },
