@@ -5,6 +5,9 @@ const {
 } = require("discord.js");
 var ms = require("minestat");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,7 +28,8 @@ module.exports = {
   async execute(interaction) {
     const ip = interaction.options.getString("ip");
     const port = interaction.options.getString("port");
-
+const getMovieData = await fetch(url);
+    const movieData = await getMovieData.json();
 
     console.log(ms.init(ip, 25565))
     await interaction.reply("```" + "My Latency:  " + "/ms" + "```");
