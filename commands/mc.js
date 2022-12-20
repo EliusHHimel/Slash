@@ -43,9 +43,12 @@ module.exports = {
         },
         {
           name: "Version",
-          value: serverData.online ? serverData.version : "N/A",
+          value: serverData.online ? serverData.version : "N/A", inline: true
         },
-        
+        {
+          name: "Server IP",
+          value: serverData.online ? serverData.hostname : "N/A"
+        },
       )
       .setTimestamp()
       .setFooter({
