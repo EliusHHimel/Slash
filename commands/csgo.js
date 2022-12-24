@@ -25,6 +25,7 @@ module.exports = {
     
     const getCsgoStats = await fetch(csgoStatsURL);
     const csgoStatsData = await getCsgoStats.json();
+    console.log(csgoStatsData)
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
