@@ -30,7 +30,6 @@ for (const file of commandFiles) {
 
 
 client.on(Events.InteractionCreate, async interaction => {
-  client.user.setActivity('/help', { type: ActivityType.Listening});
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
@@ -51,6 +50,7 @@ client.on(Events.InteractionCreate, async interaction => {
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
+  client.user.setActivity(`\on ${client.guilds.cache.size} Servers.`, { type: ActivityType.Listening});
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
