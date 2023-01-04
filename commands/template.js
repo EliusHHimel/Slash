@@ -3,8 +3,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = {
 	data: new SlashCommandBuilder()
-  //set the name of your command ↓ 
-		.setName('yourCommandName')
+  //set the name of your command, must be lowercase ↓ 
+		.setName('commandname')
   //set a short description about what your command does ↓  
 		.setDescription('Your Command Description'),
 	async execute(interaction) {
