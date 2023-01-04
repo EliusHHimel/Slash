@@ -49,6 +49,7 @@ Further instructions are given in the file.
 Now simply push your modified code to github and create a Pull Request. I'll review your code and merge them to the main branch. And finally your added feature will be live in our live bot.
 
 You can invite the bot in your server to test your own feature.
+
 Bot Invite Link: [Add Slash in Server](https://discord.com/api/oauth2/authorize?client_id=1053590161897816114&permissions=8&scope=bot%20applications.commands)
 
 
