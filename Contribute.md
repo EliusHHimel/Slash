@@ -46,21 +46,11 @@ module.exports = {
 Further instructions are given in the file.
 
 ## Step 3
-Now simply push your modified code to github and make a pull request.
+Now simply push your modified code to github and create a Pull Request. I'll review your code and merge them to the main branch. And finally your added feature will be live in our live bot.
 
-```js
-const favorites = [];
-```
+You can invite the bot in your server to test your own feature.
+Bot Invite Link: [Add Slash in Server](https://discord.com/api/oauth2/authorize?client_id=1053590161897816114&permissions=8&scope=bot%20applications.commands)
 
-In the `POST` route, inside the `if(color)` block, add this code to save the submitted value to the array, and write it to the console:
 
-```js
-favorites.push(color);
-console.log(favorites);
-```
-
-Click __Tools__ > __Logs__ at the bottom of Glitch to see the log statement in action when you submit new colors through the form.
-
-## Keep going! 🚀
-
-Clearly this is not a robust data storage approach and won't persist for long! Your Node apps can use a variety of databases, like [SQLite](https://glitch.com/~glitch-hello-sqlite) and [Airtable](https://glitch.com/~glitch-hello-airtable).
+## Feedback 🚀
+You can always give me feedback about improving this project anytime.
