@@ -16,6 +16,8 @@ module.exports = {
 		    { name: 'Ping', value: "Run this command to see the bot ping \n ```/ping```"},
         { name: 'Movie/Series', value: "Run this command to search a movie or series information \n ```/movie movie_title: Interstellar```" },
         { name: 'Quotes', value: "Run this command to get a random quotes \n ```/quotes```" },
+        { name: 'MC Status', value: "Run this command to see minecraft server status \n ```/status ip: hypixel.net```" },
+        { name: 'URL Shortner', value: "Run this command to shorten url \n ```/short url: https://eliushhimel.com```" },
         { name: 'CS:GO', value: "Run this command to see your CS:GO Stats \n ```/csgo steamid: officials1mple```" },
         { name: 'Server', value: "Run this command to see the server info \n ```/server```" },
 	)
