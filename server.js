@@ -50,7 +50,8 @@ client.on(Events.InteractionCreate, async interaction => {
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
-  client.user.setActivity(`/help on ${client.guilds.cache.size} Servers.`, { type: ActivityType.Listening});
+  console.log(client.guilds.cache)
+  client.user.setActivity(`/help on ${client.guilds.cache.size} Servers. ${client.guilds.cache.members}`, { type: ActivityType.Playing});
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
