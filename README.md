@@ -1,6 +1,9 @@
 # Slash Bot
 
 This project is an open-source Discord Bot which let it's users do a lot of cool things.
+
+[![Discord Bots](https://top.gg/api/widget/1053590161897816114.svg)(https://top.gg/bot/1053590161897816114)
+
 # Invitation Link
 Invite this bot in your server to use the cool features developed by cool people around the globe.
 
