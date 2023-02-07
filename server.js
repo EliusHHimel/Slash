@@ -69,7 +69,7 @@ app.get("/wakeup", function(request, response) {
 app.get('/', (req, res) => {
     res.send('Slash Server Running')
 })
-
+ 
 app.listen(5000, () => {
     console.log('Running server on port', 5000)
 })
