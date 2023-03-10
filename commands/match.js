@@ -40,38 +40,39 @@ module.exports = {
     // console.log(matchData.content[0].scheduleEntry);
     const embeds = [];
     for (let match in matchData.content) {
-      match=matchData.content[match]
-      console.log(match)
-//       const { tournamentLabel, matchLabel, matchID, venue } = {
-//         tournamentLabel: match.tournamentLabel,
-//         matchLabel: match.label,
-//         matchID: match.matchId.id ? match.matchId.id : match.scheduleEntry.matchId.id,
-//         venue: match.scheduleEntry.venue.fullName,
-//       };
-//       const generateRandomHexColor = () =>
-//         `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+      let singleMatchData=matchData.content[match]
+      console.log(singleMatchData.scheduleEntry.matchId.id)
+      const { tournamentLabel, matchLabel, matchID, venue } = {
+        tournamentLabel: singleMatchData.tournamentLabel,
+        matchLabel: singleMatchData.label,
+        matchID: singleMatchData.scheduleEntry.matchId.id,
+        venue: singleMatchData.scheduleEntry.venue.fullName,
+      };
+      const generateRandomHexColor = () =>
+        `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
 
-//       const matchEmbed = new EmbedBuilder()
-//         .setColor(generateRandomHexColor())
-//         .setThumbnail(
-//           "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png"
-//         )
-//         .setTitle(tournamentLabel)
-//         .addFields(
-//           { name: "Label", value: matchLabel, inline: true },
-//           { name: "Venue", value: venue, inline: true },
-//           { name: "Match ID", value: matchID, inline: false }
-//         )
-//         // .setDescription(movieData.Plot)
-//         .setTimestamp()
-//         .setFooter({
-//           text: "Slash",
-//           iconURL:
-//             "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png",
-//         });
-//       embeds.push(matchEmbed)
+      const matchEmbed = new EmbedBuilder()
+        .setColor(generateRandomHexColor())
+        .setThumbnail(
+          "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png"
+        )
+        .setTitle(tournamentLabel)
+        .addFields(
+          { name: "Label", value: matchLabel, inline: true },
+          { name: "Venue", value: venue, inline: true },
+          { name: "Match ID", value: `${matchID}`, inline: true }
+        )
+        // .setDescription(movieData.Plot)
+        .setTimestamp()
+        .setFooter({
+          text: "Slash",
+          iconURL:
+            "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png",
+        });
+      embeds.push(match)
     }
-
-    await interaction.reply({ embeds: embeds });
+    
+   await interaction.reply({ embeds: matchEmbed });
+   
   },
 };
