@@ -69,10 +69,10 @@ module.exports = {
           iconURL:
             "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png",
         });
-      embeds.push(match)
+      embeds.push(matchEmbed)
     }
     
-   await interaction.reply({ embeds: matchEmbed });
+   await interaction.reply({ embeds: embeds });
    
   },
 };
