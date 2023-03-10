@@ -7,7 +7,7 @@ const {
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const movieAPIKey = process.env.MOVIE_API_KEY;
+const movieAPIKey = process.env.ICC_API;
 
 module.exports = {
   data: new SlashCommandBuilder()
