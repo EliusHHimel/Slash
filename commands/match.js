@@ -42,12 +42,13 @@ module.exports = {
     for (let match in matchData.content) {
       let singleMatchData=matchData.content[match]
       console.log(singleMatchData.scheduleEntry.matchId.id)
-      const { tournamentLabel, matchLabel, matchID, venue, time } = {
+      const { tournamentLabel, matchLabel, matchID, venue,date, time } = {
         tournamentLabel: singleMatchData.tournamentLabel,
         matchLabel: singleMatchData.label,
         matchID: singleMatchData.scheduleEntry.matchId.id,
         venue: singleMatchData.scheduleEntry.venue.fullName,
-        time: singleMatchData.timestamp.slice(0, 10)
+        date: singleMatchData.timestamp.slice(0, 10),
+        time: singleMatchData.timestamp.slice(11).slice(0, 8)
       };
       const generateRandomHexColor = () =>
         `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
@@ -62,7 +63,8 @@ module.exports = {
           { name: "Label", value: matchLabel, inline: true },
           { name: "Venue", value: venue, inline: true },
           { name: "Match ID", value: `${matchID}`, inline: true },
-          { name: "Date", value: `${time}`, inline: true },
+          { name: "Date", value: `${date}`, inline: true },
+          { name: "Time", value: `${time}`, inline: true },
         )
         // .setDescription(movieData.Plot)
         .setTimestamp()
