@@ -37,14 +37,15 @@ module.exports = {
       credentials: "omit",
     });
     const matchData = await getMatch.json();
-    console.log(matchData.content[0].scheduleEntry);
+    // console.log(matchData.content[0].scheduleEntry);
     const embeds = [];
     for (let match in matchData.content) {
+      match=matchData.content[match]
       console.log(match)
       const { tournamentLabel, matchLabel, matchID, venue } = {
         tournamentLabel: match.tournamentLabel,
         matchLabel: match.label,
-        matchID: match.matchid.id? match.matchid.id : match.scheduleEntry.matchid.id,
+        matchID: match.matchId.id? match.matchId.id : match.scheduleEntry.matchId.id,
         venue: match.scheduleEntry.venue.fullName,
       };
       const generateRandomHexColor = () =>
