@@ -24,7 +24,7 @@ module.exports = {
     const matchid = interaction.options.getString("matchid");
     const url = `https://cricketapi-icc.pulselive.com/fixtures/${matchid}/scoring`;
 
-    const getScore = await fetch("https://cricketapi-icc.pulselive.com/fixtures/101864/scoring", {
+    const getScore = await fetch(url, {
             "headers": {
                 "accept": "*/*",
                 "accept-language": "en-US,en;q=0.9",
@@ -43,9 +43,9 @@ module.exports = {
             "method": "GET",
             "mode": "cors",
             "credentials": "omit"
-        }).then(res => res.json()).then(data => console.log(data))
-    // // const scoreData = await getScore.json();
-    // console.log(getScore)
+        });
+    const scoreData = await getScore.json();
+    console.log(scoreData)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
