@@ -11,18 +11,11 @@ const iccAPI = process.env.ICC_API;
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("score")
-    .setDescription("Get Live Score")
-    .addStringOption((option) =>
-      option
-        .setName("matchid")
-        .setDescription("Enter the match id")
-        .setRequired(true)
-    )
+    .setName("match")
+    .setDescription("Get ICC match list")
   ,
   async execute(interaction) {
-    const matchid = interaction.options.getString("matchid");
-    const url = `${iccAPI}/fixtures/${matchid}/scoring`;
+    const url = `${iccAPI}/fixtures/scoring`;
 
     const getScore = await fetch(url, {
             "headers": {
