@@ -22,7 +22,7 @@ module.exports = {
   ,
   async execute(interaction) {
     const matchid = interaction.options.getString("matchid");
-    const url = `https://cricketapi-icc.pulselive.com/fixtures/${matchid}/scoring`;
+    const url = `fixtures/${matchid}/scoring`;
 
     const getScore = await fetch(url, {
             "headers": {
@@ -50,7 +50,7 @@ module.exports = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
-      over: scoreData.innings[innings-1].overProgress
+      over: scoreData.innings[innings-1].overProgress,
     }
     console.log(runs)
 
@@ -63,18 +63,10 @@ module.exports = {
       .setColor(generateRandomHexColor())
 .setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
 	.setTitle(tournamentLabel)
-	// .addFields(
-	// 	    { name: 'Genre', value: movieData.Genre },
-	// 	    { name: 'Year', value: movieData.Year, inline: true },
-	// 	    { name: 'Runtime', value: movieRuntime, inline: true },
-	// { name: 'Director', value: movieData.Director, inline: true },
-	// { name: 'Actors', value: movieData.Actors },
-	// { name: 'Writer', value: movieData.Writer },
-	// { name: 'Awards', value: movieData.Awards },
-	// { name: 'IMDB Rating', value: movieData.imdbRating, inline: true },
-	// 	    { name: 'IMDB Votes', value: movieData.imdbVotes, inline: true },
-	// { name: 'Box Office', value: movieData.BoxOffice ? movieData.BoxOffice : 'N/A', inline: true },
-	// )
+	.addFields(
+		    { name: 'Score', value: `${runs}/${wickets}`, inline: true },
+		    { name: 'Over', value: over, inline: true },
+	)
 	// .setDescription(movieData.Plot)
       .setTimestamp()
       .setFooter({ text: 'Slash', iconURL: 'https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png' });
