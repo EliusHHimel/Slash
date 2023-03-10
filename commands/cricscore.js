@@ -7,7 +7,7 @@ const {
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const movieAPIKey = process.env.ICC_API;
+const iccAPI = process.env.ICC_API;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -22,7 +22,7 @@ module.exports = {
   ,
   async execute(interaction) {
     const matchid = interaction.options.getString("matchid");
-    const url = `fixtures/${matchid}/scoring`;
+    const url = `${iccAPI}/fixtures/${matchid}/scoring`;
 
     const getScore = await fetch(url, {
             "headers": {
@@ -52,7 +52,6 @@ module.exports = {
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
       over: scoreData.innings[innings-1].overProgress,
     }
-    console.log(runs)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
