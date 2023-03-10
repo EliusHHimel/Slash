@@ -11,43 +11,31 @@ const movieAPIKey = process.env.MOVIE_API_KEY;
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("movie")
-    .setDescription("Search for Movie Information")
+    .setName("score")
+    .setDescription("Get Live Score")
     .addStringOption((option) =>
       option
-        .setName("title")
-        .setDescription("Enter the title of the movie you want to search for")
-        .setRequired(true)
-    )
-  .addStringOption((option) =>
-      option
-        .setName("type")
-        .setDescription("Enter the type [movie, series, episode]")
+        .setName("matchid")
+        .setDescription("Enter the match id")
         .setRequired(true)
     )
   ,
   async execute(interaction) {
-    const title = interaction.options.getString("title");
-    const type = interaction.options.getString("type");
-    const url = `https://www.omdbapi.com/?apikey=${movieAPIKey}&type=${type}&t=${title}`;
-  
+    const matchid = interaction.options.getString("matchid");
+  const url = `https://cricketapi-icc.pulselive.com/fixtures/${matchid}/scoring`;
 
-    const getScore = fetch("https://cricketapi-icc.pulselive.com/fixtures/101864/scoring", {
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": null,
-  "method": "GET"
-});
+    const getScore = await fetch(url);
     const scoreData = await getScore.json();
     console.log(scoreData)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
     
-    const movieRuntimeInt = parseInt(movieData.Runtime)
-    const movieRuntime = `${Math.floor(movieRuntimeInt/60)} Hrs, ${movieRuntimeInt%60} Mins`
-    const movieEmbed = new EmbedBuilder()
+    // const movieRuntimeInt = parseInt(movieData.Runtime)
+    // const movieRuntime = `${Math.floor(movieRuntimeInt/60)} Hrs, ${movieRuntimeInt%60} Mins`
+    const scoreEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-	// .setThumbnail(movieData.Poster)
+	// .setThumbnail(scoreData.Poster)
 	// .setTitle(movieData.Title)
 	// .addFields(
 	// 	    { name: 'Genre', value: movieData.Genre },
@@ -65,6 +53,6 @@ module.exports = {
       .setTimestamp()
       .setFooter({ text: 'Slash', iconURL: 'https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png' });
 
-    await interaction.reply({ embeds: [movieEmbed] });
+    await interaction.reply({ embeds: [scoreEmbed] });
   },
 };
