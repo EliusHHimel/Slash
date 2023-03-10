@@ -45,7 +45,10 @@ module.exports = {
             "credentials": "omit"
         });
     const scoreData = await getScore.json();
-    console.log(scoreData)
+    const {runs, wickets} = {
+      runs: `${Object.keys(scoreData.innings).length=1? scoreData.innings[0].scorecard.runs: scoreData.innings[1].scorecard.runs}`
+    }
+    console.log(runs)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
