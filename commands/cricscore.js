@@ -45,8 +45,12 @@ module.exports = {
             "credentials": "omit"
         });
     const scoreData = await getScore.json();
-    const {runs, wickets} = {
-      runs: `${Object.keys(scoreData.innings).length=1? scoreData.innings[0].scorecard.runs: scoreData.innings[1].scorecard.runs}`
+    const innings = Object.keys(scoreData.innings).length;
+    const {runs, wickets, tournamentLabel, over} = {
+      runs: scoreData.innings[innings-1].scorecard.runs,
+      wickets: scoreData.innings[innings-1].scorecard.wkts,
+      tournamentLabel: scoreData.matchInfo.tournamentLabel,
+      over: scoreData.innings[innings-1].overProgress
     }
     console.log(runs)
 
@@ -57,8 +61,8 @@ module.exports = {
     // const movieRuntime = `${Math.floor(movieRuntimeInt/60)} Hrs, ${movieRuntimeInt%60} Mins`
     const scoreEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
-	// .setThumbnail(scoreData.Poster)
-	// .setTitle(movieData.Title)
+.setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
+	.setTitle(tournamentLabel)
 	// .addFields(
 	// 	    { name: 'Genre', value: movieData.Genre },
 	// 	    { name: 'Year', value: movieData.Year, inline: true },
