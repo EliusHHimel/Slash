@@ -22,11 +22,30 @@ module.exports = {
   ,
   async execute(interaction) {
     const matchid = interaction.options.getString("matchid");
-  const url = `https://cricketapi-icc.pulselive.com/fixtures/${matchid}/scoring`;
+    const url = `https://cricketapi-icc.pulselive.com/fixtures/${matchid}/scoring`;
 
-    const getScore = await fetch(url);
-    const scoreData = await getScore.json();
-    console.log(scoreData)
+    const getScore = await fetch("https://cricketapi-icc.pulselive.com/fixtures/101864/scoring", {
+            "headers": {
+                "accept": "*/*",
+                "accept-language": "en-US,en;q=0.9",
+                "account": "ICC",
+                "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Windows\"",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "cross-site"
+            },
+            "referrer": "https://www.icc-cricket.com/",
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "body": null,
+            "method": "GET",
+            "mode": "cors",
+            "credentials": "omit"
+        }).then(res => res.json()).then(data => console.log(data))
+    // // const scoreData = await getScore.json();
+    // console.log(getScore)
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
