@@ -50,26 +50,34 @@ module.exports = {
     const innings = Object.keys(scoreData.innings).length;
   
 
-    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler} = {
+    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler, runRate} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
       over: scoreData.innings[innings-1].overProgress,
       facingBatter: scoreData.currentState.facingBatsman,
       nonFacingBatter: scoreData.currentState.nonFacingBatsman,
-      bowler: scoreData.currentState.currentBowler
+      bowler: scoreData.currentState.currentBowler,
+      runRate: scoreData.innings[innings-1].runRate
     }
 //     Batsman and Bowler Name and score
     const battingStat = scoreData.innings[innings-1].scorecard.battingStats
+    const bowlingStat = scoreData.innings[innings-1].scorecard.bowlingStats
     const facingBMScore = battingStat.find(o => o.playerId === facingBatter);
     const nonFacingBMScore = battingStat.find(o => o.playerId === nonFacingBatter);
-    const {fr, fb, fsr, nfr, nfb, nfsr} = {
+    const bowlerScore = bowlingStat.find(o => o.playerId === bowler);
+    
+    const {fr, fb, fsr, nfr, nfb, nfsr, br, bo, bw, be} = {
       fr: facingBMScore.r,
       fb: facingBMScore.b,
       fsr: facingBMScore.sr,
       nfr: nonFacingBMScore.r,
       nfb: nonFacingBMScore.b,
-      nfsr: nonFacingBMScore.sr
+      nfsr: nonFacingBMScore.sr,
+      br: bowlerScore.r,
+      bo: bowlerScore.ov,
+      bw: bowlerScore.w,
+      be: bowlerScore.e
     }
     
     const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
@@ -101,12 +109,14 @@ module.exports = {
 .setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
 	.setTitle(tournamentLabel)
 	.addFields(
+    { name: 'Batting Team', value: `R/W: ${runs}/${wickets}`, inline: true },
+    { name: 'Bowling Team', value: `R/W: ${runs}/${wickets}`, inline: true },
+            { name: 'Innings', value: `${innings}`, inline: true },
 		    { name: 'Score', value: `R/W: ${runs}/${wickets}`, inline: true },
-		    { name: 'Overs', value: over, inline: true },
-        { name: 'Innings', value: `${innings}`, inline: true },
+          { name: 'Run Rate', value: `${innings}`, inline: true },
         { name: 'Facing Batsman', value: `${facingBatsman} (${fr}/${fb}) \n St.Rate: ${fsr}`, inline: true },
         { name: 'NonFacing Batsman', value: `${nonFacingBatsman} (${nfr}/${nfb}) \n St.Rate: ${nfsr}`, inline: true },
-        { name: 'Bowler', value: currentBowler, inline: true },
+        { name: 'Bowler', value: `${currentBowler} \n ${br}/${bw} (${bo}) Econ: ${be}`, inline: true },
 	)
 	// .setDescription(movieData.Plot)
       .setTimestamp()
