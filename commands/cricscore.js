@@ -53,6 +53,7 @@ module.exports = {
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
       over: scoreData.innings[innings-1].overProgress,
+      facingBatter: 
     }
 
     const generateRandomHexColor = () =>
