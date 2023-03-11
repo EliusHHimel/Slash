@@ -14,9 +14,9 @@ module.exports = {
     .setName("match")
     .setDescription("Get ICC match list"),
   async execute(interaction) {
-//     Get date
+    //     Get date
     const today = new Date();
-    const currentDate = JSON.stringify(today).slice(1, 11)
+    const currentDate = JSON.stringify(today).slice(1, 11);
     const url = `${iccAPI}/fixtures?tournamentTypes=I%2CWI&startDate=${currentDate}&endDate=${currentDate}&pageSize=100`;
     const getMatch = await fetch(url, {
       headers: {
@@ -43,15 +43,15 @@ module.exports = {
     // console.log(matchData.content[0].scheduleEntry);
     const embeds = [];
     for (let match in matchData.content) {
-      let singleMatchData=matchData.content[match]
-      console.log(singleMatchData.scheduleEntry.matchId.id)
-      const { tournamentLabel, matchLabel, matchID, venue,date, time } = {
+      let singleMatchData = matchData.content[match];
+      console.log(singleMatchData.scheduleEntry.matchId.id);
+      const { tournamentLabel, matchLabel, matchID, venue, date, time } = {
         tournamentLabel: singleMatchData.tournamentLabel,
         matchLabel: singleMatchData.label,
         matchID: singleMatchData.scheduleEntry.matchId.id,
         venue: singleMatchData.scheduleEntry.venue.fullName,
         date: singleMatchData.timestamp.slice(0, 10),
-        time: singleMatchData.timestamp.slice(11).slice(0, 8)
+        time: singleMatchData.timestamp.slice(11).slice(0, 8),
       };
       const generateRandomHexColor = () =>
         `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
@@ -67,7 +67,7 @@ module.exports = {
           { name: "Venue", value: venue, inline: true },
           { name: "Match ID", value: `${matchID}`, inline: true },
           { name: "Date", value: `${date}`, inline: true },
-          { name: "Time", value: `${time}`, inline: true },
+          { name: "Time", value: `${time}`, inline: true }
         )
         // .setDescription(movieData.Plot)
         .setTimestamp()
@@ -76,10 +76,9 @@ module.exports = {
           iconURL:
             "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png",
         });
-      embeds.push(matchEmbed)
+      embeds.push(matchEmbed);
     }
-    
-   await interaction.reply({ embeds: embeds });
-   
+
+    await interaction.reply({ embeds: embeds });
   },
 };
