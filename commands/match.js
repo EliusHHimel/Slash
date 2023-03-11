@@ -14,6 +14,9 @@ module.exports = {
     .setName("match")
     .setDescription("Get ICC match list"),
   async execute(interaction) {
+//     Get date
+    let today = new Date();
+    console.log(today)
     const url = `${iccAPI}/fixtures?tournamentTypes=I%2CWI&startDate=2023-03-09&endDate=2023-03-11&pageSize=100`;
     const getMatch = await fetch(url, {
       headers: {
