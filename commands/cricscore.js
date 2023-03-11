@@ -140,6 +140,9 @@ module.exports = {
       )
       .setTitle(tournamentLabel)
       .addFields(
+        { name: "Batting Team", value: `${currentBattingTeam}`, inline: true },
+        { name: "Bowling Team", value: `${currentBowlingTeam}`, inline: true },
+        { name: "Innings", value: `${innings}`, inline: true },
         { name: "Score", value: `R/W: ${runs}/${wickets}`, inline: true },
         { name: "Overs", value: `${over}`, inline: true },
         { name: "Run Rate", value: `${runRate}`, inline: true },
@@ -158,9 +161,6 @@ module.exports = {
           value: `${currentBowler} \n ${br}/${bw} (${bo}) Econ: ${be}`,
           inline: true,
         },
-        { name: "Batting Team", value: `${currentBattingTeam}`, inline: true },
-        { name: "Bowling Team", value: `${currentBowlingTeam}`, inline: true },
-        { name: "Innings", value: `${innings}`, inline: true },
       )
       // .setDescription(movieData.Plot)
       .setTimestamp()
