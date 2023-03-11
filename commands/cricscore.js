@@ -32,7 +32,7 @@ module.exports = {
         "sec-ch-ua":
           '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
         "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
+        "sec-ch-ua-platform": "\"Windows\"",
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "cross-site",
