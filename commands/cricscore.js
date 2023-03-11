@@ -46,8 +46,11 @@ module.exports = {
         });
     const scoreData = await getScore.json();
     
-    
+        
     const innings = Object.keys(scoreData.innings).length;
+    const battingStat = scoreData.innings[innings-1].scorecard.battingStats
+    const facingBMRuns = scoreData.find(o => o.playerId === 'string 1');
+
     const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
@@ -87,7 +90,7 @@ module.exports = {
 .setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
 	.setTitle(tournamentLabel)
 	.addFields(
-		    { name: 'Score', value: `Runs: ${runs} Wickets: ${wickets}`, inline: true },
+		    { name: 'Score', value: `R/W: ${runs}/${wickets}`, inline: true },
 		    { name: 'Overs', value: over, inline: true },
         { name: 'Innings', value: `${innings}`, inline: true },
         { name: 'Facing Batsman', value: facingBatsman, inline: true },
