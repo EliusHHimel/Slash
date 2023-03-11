@@ -50,7 +50,7 @@ module.exports = {
     const innings = Object.keys(scoreData.innings).length;
   
 
-    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler, runRate} = {
+    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler, runRate, battingTeam, bowlingTeam} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
@@ -58,7 +58,9 @@ module.exports = {
       facingBatter: scoreData.currentState.facingBatsman,
       nonFacingBatter: scoreData.currentState.nonFacingBatsman,
       bowler: scoreData.currentState.currentBowler,
-      runRate: scoreData.innings[innings-1].runRate
+      runRate: scoreData.innings[innings-1].runRate,
+      battingTeam: scoreData.innings[innings-1].battingTeamId,
+      bowlingTeam: scoreData.innings[innings-1].bowlingTeamId
     }
 //     Batsman and Bowler Name and score
     const battingStat = scoreData.innings[innings-1].scorecard.battingStats
@@ -83,6 +85,8 @@ module.exports = {
     const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
     const nfBatUrl = `${iccAPI}/players/${nonFacingBatter}/`;
     const bowlerUrl = `${iccAPI}/players/${bowler}/`;
+    const batTeamUrl = `${iccAPI}/teams/${battingTeam}/`;
+    const bowlTeamUrl = `${iccAPI}/teams/${bowlingTeam}/`;
     
     const getfacingBatter = await fetch(fBatUrl);
     const fBatterData = await getfacingBatter.json();
@@ -92,11 +96,19 @@ module.exports = {
     
     const getcurrentBowler = await fetch(bowlerUrl);
     const currentBowlerData = await getcurrentBowler.json();
+    
+    const getBattingTeam = await fetch(batTeamUrl);
+    const battingTeamData = await getBattingTeam.json();
+    
+    const getBowlingTeam = await fetch(bowlTeamUrl);
+    const bowlingTeamData = await getBowlingTeam.json();
  
-    const {facingBatsman, nonFacingBatsman, currentBowler} = {
+    const {facingBatsman, nonFacingBatsman, currentBowler, currentBattingTeam, currentBowlingTeam} = {
       facingBatsman: fBatterData.fullName,
       nonFacingBatsman: nfBatterData.fullName,
-      currentBowler: currentBowlerData.fullName
+      currentBowler: currentBowlerData.fullName,
+      currentBattingTeam: battingTeamData.fullName,
+      currentBowlingTeam: bowlingTeamData.fullName
     }
 
     const generateRandomHexColor = () =>
@@ -109,11 +121,12 @@ module.exports = {
 .setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
 	.setTitle(tournamentLabel)
 	.addFields(
-    { name: 'Batting Team', value: `R/W: ${runs}/${wickets}`, inline: true },
-    { name: 'Bowling Team', value: `R/W: ${runs}/${wickets}`, inline: true },
+    { name: 'Batting Team', value: `${currentBattingTeam}`, inline: true },
+    { name: 'Bowling Team', value: `${currentBowlingTeam}`, inline: true },
             { name: 'Innings', value: `${innings}`, inline: true },
 		    { name: 'Score', value: `R/W: ${runs}/${wickets}`, inline: true },
-          { name: 'Run Rate', value: `${innings}`, inline: true },
+    { name: 'Overs', value: `${over}`, inline: true },
+          { name: 'Run Rate', value: `${runRate}`, inline: true },
         { name: 'Facing Batsman', value: `${facingBatsman} (${fr}/${fb}) \n St.Rate: ${fsr}`, inline: true },
         { name: 'NonFacing Batsman', value: `${nonFacingBatsman} (${nfr}/${nfb}) \n St.Rate: ${nfsr}`, inline: true },
         { name: 'Bowler', value: `${currentBowler} \n ${br}/${bw} (${bo}) Econ: ${be}`, inline: true },
