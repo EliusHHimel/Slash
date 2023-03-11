@@ -48,12 +48,25 @@ module.exports = {
     
     
     const innings = Object.keys(scoreData.innings).length;
-    const {runs, wickets, tournamentLabel, over} = {
+    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, currentBowler} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
       over: scoreData.innings[innings-1].overProgress,
-      facingBatter: 
+      facingBatter: scoreData.currentState.facingBatsman,
+      nonFacingBatter: scoreData.currentState.nonFacingBatsman,
+      bowler: scoreData.currentState.currentBowler
+    }
+//     Batsman and Bowler Name and score
+    const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
+    const nfBatUrl = `${iccAPI}/players/${nonFacingBatter}/`;
+    const bowlerUrl = `${iccAPI}/players/${facingBatter}/`;
+    const getfacingBatter = await fetch(fBatUrl);
+    const fBatterData = await getfacingBatter.json();
+ 
+    const {facingBatsman, nonFacingBatsman} = {
+      facingBatsman: fBatterData.fullName,
+      nonFacingBatsman: ''
     }
 
     const generateRandomHexColor = () =>
