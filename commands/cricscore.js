@@ -48,7 +48,7 @@ module.exports = {
     
     
     const innings = Object.keys(scoreData.innings).length;
-    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, currentBowler} = {
+    const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
       wickets: scoreData.innings[innings-1].scorecard.wkts,
       tournamentLabel: scoreData.matchInfo.tournamentLabel,
@@ -60,13 +60,21 @@ module.exports = {
 //     Batsman and Bowler Name and score
     const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
     const nfBatUrl = `${iccAPI}/players/${nonFacingBatter}/`;
-    const bowlerUrl = `${iccAPI}/players/${facingBatter}/`;
+    const bowlerUrl = `${iccAPI}/players/${bowler}/`;
+    
     const getfacingBatter = await fetch(fBatUrl);
     const fBatterData = await getfacingBatter.json();
+    
+    const getNonFacingBatter = await fetch(nfBatUrl);
+    const nfBatterData = await getNonFacingBatter.json();
+    
+    const getcurrentBowler = await fetch(bowlerUrl);
+    const currentBowlerData = await getcurrentBowler.json();
  
-    const {facingBatsman, nonFacingBatsman} = {
+    const {facingBatsman, nonFacingBatsman, currentBowler} = {
       facingBatsman: fBatterData.fullName,
-      nonFacingBatsman: ''
+      nonFacingBatsman: nfBatterData.fullName,
+      currentBowler: currentBowlerData.fullName
     }
 
     const generateRandomHexColor = () =>
@@ -79,10 +87,12 @@ module.exports = {
 .setThumbnail('https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png')
 	.setTitle(tournamentLabel)
 	.addFields(
-		    { name: 'Score', value: `Runs: ${runs} Wickets:${wickets}`, inline: true },
-		    { name: 'Over', value: over, inline: true },
-        { name: 'Innings', value: innings, inline: true },
-        { name: 'Facing Batter', value: over, inline: true },
+		    { name: 'Score', value: `Runs: ${runs} Wickets: ${wickets}`, inline: true },
+		    { name: 'Overs', value: over, inline: true },
+        { name: 'Innings', value: `${innings}`, inline: true },
+        { name: 'Facing Batsman', value: facingBatsman, inline: true },
+        { name: 'NonFacing Batsman', value: nonFacingBatsman, inline: true },
+        { name: 'Bowler', value: currentBowler, inline: true },
 	)
 	// .setDescription(movieData.Plot)
       .setTimestamp()
