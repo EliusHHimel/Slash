@@ -48,8 +48,7 @@ module.exports = {
     
         
     const innings = Object.keys(scoreData.innings).length;
-    const battingStat = scoreData.innings[innings-1].scorecard.battingStats
-    const facingBMRuns = scoreData.find(o => o.playerId === 'string 1');
+  
 
     const {runs, wickets, tournamentLabel, over, facingBatter, nonFacingBatter, bowler} = {
       runs: scoreData.innings[innings-1].scorecard.runs,
@@ -61,6 +60,18 @@ module.exports = {
       bowler: scoreData.currentState.currentBowler
     }
 //     Batsman and Bowler Name and score
+    const battingStat = scoreData.innings[innings-1].scorecard.battingStats
+    const facingBMScore = battingStat.find(o => o.playerId === facingBatter);
+    const nonFacingBMScore = battingStat.find(o => o.playerId === nonFacingBatter);
+    const {fr, fb, fsr, nfr, nfb, nfsr} = {
+      fr: facingBMScore.r,
+      fb: facingBMScore.b,
+      fsr: facingBMScore.sr,
+      nfr: nonFacingBMScore.r,
+      nfb: nonFacingBMScore.b,
+      nfsr: nonFacingBMScore.sr
+    }
+    
     const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
     const nfBatUrl = `${iccAPI}/players/${nonFacingBatter}/`;
     const bowlerUrl = `${iccAPI}/players/${bowler}/`;
@@ -93,8 +104,8 @@ module.exports = {
 		    { name: 'Score', value: `R/W: ${runs}/${wickets}`, inline: true },
 		    { name: 'Overs', value: over, inline: true },
         { name: 'Innings', value: `${innings}`, inline: true },
-        { name: 'Facing Batsman', value: facingBatsman, inline: true },
-        { name: 'NonFacing Batsman', value: nonFacingBatsman, inline: true },
+        { name: 'Facing Batsman', value: `${facingBatsman} (${fr}/${fb}) \n St.Rate: ${fsr}`, inline: true },
+        { name: 'NonFacing Batsman', value: `${nonFacingBatsman} (${nfr}/${nfb}) \n St.Rate: ${nfsr}`, inline: true },
         { name: 'Bowler', value: currentBowler, inline: true },
 	)
 	// .setDescription(movieData.Plot)
