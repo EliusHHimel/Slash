@@ -32,7 +32,7 @@ module.exports = {
         "sec-ch-ua":
           '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
         "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"Windows\"",
+        "sec-ch-ua-platform": "Windows",
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "cross-site",
@@ -81,16 +81,16 @@ module.exports = {
     const bowlerScore = bowlingStat.find((o) => o.playerId === bowler);
 
     const { fr, fb, fsr, nfr, nfb, nfsr, br, bo, bw, be } = {
-      fr: facingBMScore.r,
-      fb: facingBMScore.b,
-      fsr: facingBMScore.sr,
-      nfr: nonFacingBMScore.r,
-      nfb: nonFacingBMScore.b,
-      nfsr: nonFacingBMScore.sr,
-      br: bowlerScore.r,
-      bo: bowlerScore.ov,
-      bw: bowlerScore.w,
-      be: bowlerScore.e,
+      fr: facingBMScore?.r,
+      fb: facingBMScore?.b,
+      fsr: facingBMScore?.sr,
+      nfr: nonFacingBMScore?.r,
+      nfb: nonFacingBMScore?.b,
+      nfsr: nonFacingBMScore?.sr,
+      br: bowlerScore?.r,
+      bo: bowlerScore?.ov,
+      bw: bowlerScore?.w,
+      be: bowlerScore?.e,
     };
 
     const fBatUrl = `${iccAPI}/players/${facingBatter}/`;
@@ -99,19 +99,119 @@ module.exports = {
     const batTeamUrl = `${iccAPI}/teams/${battingTeam}/`;
     const bowlTeamUrl = `${iccAPI}/teams/${bowlingTeam}/`;
 
-    const getfacingBatter = await fetch(fBatUrl);
+    const getfacingBatter = await fetch(fBatUrl, {
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        account: "ICC",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua":
+          '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "Windows",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+      },
+      referrer: "https://www.icc-cricket.com/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+    });
     const fBatterData = await getfacingBatter.json();
 
-    const getNonFacingBatter = await fetch(nfBatUrl);
+    const getNonFacingBatter = await fetch(nfBatUrl, {
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        account: "ICC",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua":
+          '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "Windows",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+      },
+      referrer: "https://www.icc-cricket.com/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+    });
     const nfBatterData = await getNonFacingBatter.json();
 
-    const getcurrentBowler = await fetch(bowlerUrl);
+    const getcurrentBowler = await fetch(bowlerUrl, {
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        account: "ICC",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua":
+          '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "Windows",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+      },
+      referrer: "https://www.icc-cricket.com/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+    });
     const currentBowlerData = await getcurrentBowler.json();
 
-    const getBattingTeam = await fetch(batTeamUrl);
+    const getBattingTeam = await fetch(batTeamUrl, {
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        account: "ICC",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua":
+          '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "Windows",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+      },
+      referrer: "https://www.icc-cricket.com/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+    });
     const battingTeamData = await getBattingTeam.json();
 
-    const getBowlingTeam = await fetch(bowlTeamUrl);
+    const getBowlingTeam = await fetch(bowlTeamUrl, {
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        account: "ICC",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua":
+          '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "Windows",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+      },
+      referrer: "https://www.icc-cricket.com/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: null,
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+    });
     const bowlingTeamData = await getBowlingTeam.json();
 
     const {
