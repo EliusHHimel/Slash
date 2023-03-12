@@ -44,7 +44,7 @@ module.exports = {
     const embeds = [];
     for (let match in matchData.content) {
       let singleMatchData = matchData.content[match];
-      console.log(singleMatchData.scheduleEntry.matchId.id);
+      // console.log(singleMatchData.scheduleEntry.matchId.id);
       const { tournamentLabel, matchLabel, matchID, venue, date, time } = {
         tournamentLabel: singleMatchData.tournamentLabel,
         matchLabel: singleMatchData.label,
