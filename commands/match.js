@@ -80,6 +80,6 @@ module.exports = {
       embeds.push(matchEmbed);
     }
 
-    await interaction.reply(`${embeds: embeds ? embeds: embeds } : 'No Match Found'`);
+    await interaction.reply(embeds ? { embeds: embeds } : 'No Match Found');
   },
 };
