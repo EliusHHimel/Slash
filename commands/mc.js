@@ -20,10 +20,10 @@ module.exports = {
     ),
   async execute(interaction) {
     const ip = interaction.options.getString("ip");
-    const url = "https://api.mcsrvstat.us/2/" + ip;
+    const url = "https://api.mcstatus.io/v2/status/java/" + ip;
     const getServerStatus = await fetch(url);
     const serverData = await getServerStatus.json();
-    console.log
+    console.log(serverData)
     
     
 
@@ -46,11 +46,11 @@ module.exports = {
         },
         {
           name: "Version",
-          value: serverData.online ? serverData.version : "N/A", inline: true
+          value: serverData.online ? serverData.version.name_raw : "N/A", inline: true
         },
         {
           name: "Server IP",
-          value: serverData.hostname
+          value: serverData.host
         },
       )
       .setTimestamp()
