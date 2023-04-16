@@ -18,6 +18,7 @@ module.exports = {
     const today = new Date();
     const currentDate = JSON.stringify(today).slice(1, 11);
     const url = `${iccAPI}/fixtures?tournamentTypes=I%2CWI&startDate=${currentDate}&endDate=${currentDate}&pageSize=100`;
+    console.log(url)
     const getMatch = await fetch(url, {
       headers: {
         accept: "*/*",
@@ -44,7 +45,7 @@ module.exports = {
     const embeds = [];
     for (let match in matchData.content) {
       let singleMatchData = matchData.content[match];
-      console.log(singleMatchData.scheduleEntry.matchId.id);
+      // console.log(singleMatchData.scheduleEntry.matchId.id);
       const { tournamentLabel, matchLabel, matchID, venue, date, time } = {
         tournamentLabel: singleMatchData.tournamentLabel,
         matchLabel: singleMatchData.label,
@@ -79,6 +80,6 @@ module.exports = {
       embeds.push(matchEmbed);
     }
 
-    await interaction.reply({ embeds: embeds });
+    await interaction.reply(embeds ? { embeds: embeds } : 'No Match Found');
   },
 };
