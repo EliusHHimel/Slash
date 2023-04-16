@@ -23,7 +23,6 @@ module.exports = {
     const url = "https://api.mcstatus.io/v2/status/java/" + ip;
     const getServerStatus = await fetch(url);
     const serverData = await getServerStatus.json();
-    console.log(serverData)
     
     
 
