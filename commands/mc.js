@@ -23,7 +23,9 @@ module.exports = {
     const url = "https://api.mcsrvstat.us/2/" + ip;
     const getServerStatus = await fetch(url);
     const serverData = await getServerStatus.json();
-    console.log(getServerStatus)
+    console.log
+    
+    
 
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
