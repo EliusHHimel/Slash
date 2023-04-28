@@ -23,14 +23,14 @@ module.exports = {
   }
 });;
     const data64bit = await response64bit.json();
-    console.log(data64bit)
+    console.log(typeof(data64bit))
     
-    const steamID64bit = data64bit.response.steamid;
-    const csgoStatsURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${process.env.STEAM_KEY}&steamid=${steamID64bit}`
+    // const steamID64bit = data64bit.response.steamid;
+    // const csgoStatsURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${process.env.STEAM_KEY}&steamid=${steamID64bit}`
     
-    const getCsgoStats = await fetch(csgoStatsURL);
-    const csgoStatsData = await getCsgoStats.json();
-    console.log(csgoStatsData)
+    // const getCsgoStats = await fetch(csgoStatsURL);
+    // const csgoStatsData = await getCsgoStats.json();
+    // console.log(csgoStatsData)
     
     const generateRandomHexColor = () =>
       `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
@@ -38,12 +38,12 @@ module.exports = {
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setAuthor({
-        name: `Players Stats`,
+        name: `Crypto Price`,
       })
-      .setDescription("CS:GO Player Info")
+      .setDescription("Crypto Price Information")
       .addFields({
-        name: csgoStatsData.playerstats.stats[0].name,
-        value: `${csgoStatsData.playerstats.stats[0].value}`,
+        name: response64bit[0].name,
+        value: `${response64bit[0].symbol}`,
         inline: true,
       })
       .setTimestamp(); 
