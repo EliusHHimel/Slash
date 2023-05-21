@@ -51,25 +51,25 @@ client.on(Events.InteractionCreate, async interaction => {
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 
-  let jsonData = JSON.stringify(client.guilds.cache);
-    // console.log(jsonData)
+	let jsonData = JSON.stringify(client.guilds.cache);
+	// console.log(jsonData)
 
-  client.user.setActivity(`/help on ${client.guilds.cache.size} Servers with  ${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} People`, { type: ActivityType.Playing});
+	client.user.setActivity(`/help on ${client.guilds.cache.size} Servers with  ${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} People`, { type: ActivityType.Playing });
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 // Log in to Discord with your client's token
 client.login(token);
 
-app.get("/wakeup", function(request, response) {
-  console.log("i'm awake");
-  response.send("i'm awake")
+app.get("/wakeup", function (request, response) {
+	console.log("i'm awake");
+	response.send("i'm awake")
 });
 
 app.get('/', (req, res) => {
-    res.send('Slash Server Running')
+	res.send('Slash Server Running')
 })
- 
+
 app.listen(5000, () => {
-    console.log('Running server on port', 5000)
+	console.log('Running server on port', 5000)
 })
