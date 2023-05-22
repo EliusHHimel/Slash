@@ -3,14 +3,14 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		//set the name of your command, must be lowercase ↓
-
-		.setName('roll')
-		.setDescription('This is a sing dice to roll. When you Roll a dice it will give a number between 1 and 6'),
+		//set the name of your command, must be lowercase ↓ 
+		.setName('commandname')
+		//set a short description about what your command does ↓  
+		.setDescription('Your Command Description'),
 	async execute(interaction) {
 		// Your feature funtionality code goes here ↓ 
-		const roll = Math.random() * 6;
+
 		// send the final output to the end user ↓ 
-		await interaction.reply(`Your dice has been rolled and output number is` + roll);
+		await interaction.reply(`This is a sample command for this open source project. More details in our GitHub Repository. \n GitHub: https://github.com/EliusHHimel/Slash`);
 	},
 };
