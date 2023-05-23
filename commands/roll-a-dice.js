@@ -11,6 +11,6 @@ module.exports = {
 		// Your feature funtionality code goes here ↓ 
 		const roll = Math.floor(Math.random() * 6) + 1;
 		// send the final output to the end user ↓ 
-		await interaction.reply(`Your dice has been rolled:- ` + roll);
+		await interaction.reply(`Your dice has been rolled: ` + roll);
 	},
 };
