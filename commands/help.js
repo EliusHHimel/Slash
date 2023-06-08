@@ -21,6 +21,7 @@ module.exports = {
         { name: 'URL Shortner', value: "Run this command to shorten url \n ```/short url: https://eliushhimel.com```" },
         { name: 'CS:GO', value: "Run this command to see your CS:GO Stats \n ```/csgo steamid: officials1mple```" },
         { name: 'Server', value: "Run this command to see the server info \n ```/server```" },
+        { name: 'Privacy Policy', value: "https://github.com/EliusHHimel/Slash/blob/main/PRIVACY_POLICY.md" },
         
 	)
       .setTimestamp()
