@@ -27,25 +27,13 @@ module.exports = {
     const getCsgoStats = await fetch(csgoStatsURL);
     const csgoStatsData = await getCsgoStats.json();
     // console.log(csgoStatsData);
-
-    async function getHTML() {
-    const res = await fetch("https://csgostats.gg/player/76561198034202275");
-    const data = await res.text();
-    return data;
-}
-
-    const htmlData = await getHTML();
-    const html = htmlData.toString();
-    const $ = cheerio.load(html, null, false);
-    const elements = $(".player-ranks img");
-    const ranks = []
-
-    elements.map((_, element) => {
-        let images = $(element).attr("src")
-        console.log(images)
-        ranks.push(images)
-    });
-    console.log(ranks[0])
+    await interaction.deferReply();
+    const csRank = await fetch(`https://csrank.eliushhimel.repl.co/players/${steamID64bit}`);
+    const rankData = await csRank.json();
+    
+    const profileUrl = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_KEY}&steamids=${steamID64bit}`
+    const getCSProfile = await fetch(profileUrl);
+    const csProfileData = await getCSProfile.json();
 
 
 
@@ -54,9 +42,13 @@ module.exports = {
 
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
+      .setTitle(`CS:GO Stats of ${csProfileData.response.players[0].personaname}`)
       .setAuthor({
-        name: `Players Stats`,
+        name: csProfileData.response.players[0].personaname,
+        iconURL: csProfileData.response.players[0].avatar,
+        url: csProfileData.response.players[0].profileurl
       })
+    .setThumbnail(rankData[0])
       .setDescription("CS:GO Player Info")
       .addFields(
         {
@@ -83,8 +75,8 @@ module.exports = {
           inline: true,
         },
         {
-          name: "More " + csgoStatsData.playerstats.stats[4].name,
-          value: `We're adding more info, please be patient`,
+          name: "Total Bomb Defused ",
+          value: `${csgoStatsData.playerstats.stats[4].value}`,
           inline: true,
         }
       )
@@ -95,6 +87,6 @@ module.exports = {
       })
       .setTimestamp();
 
-    await interaction.reply({ embeds: [exampleEmbed] });
+    await interaction.editReply({ embeds: [exampleEmbed]});
   },
 };
