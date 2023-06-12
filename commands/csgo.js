@@ -14,20 +14,17 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const steamid = interaction.options.getString("steamid");
+    await interaction.deferReply();
+    
+   try {
+      const steamid = interaction.options.getString("steamid");
     const baseURL64bit = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.STEAM_KEY}&vanityurl=${steamid}`;
 
     const response64bit = await fetch(baseURL64bit);
     const data64bit = await response64bit.json();
-
     const steamID64bit = data64bit.response.steamid;
-    const csgoStatsURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${process.env.STEAM_KEY}&steamid=${steamID64bit}`;
-    // console.log(csgoStatsURL)
-
-    const getCsgoStats = await fetch(csgoStatsURL);
-    const csgoStatsData = await getCsgoStats.json();
+     
     // console.log(csgoStatsData);
-    await interaction.deferReply();
     const csRank = await fetch(`https://csrank.eliushhimel.repl.co/players/${steamID64bit}`);
     const rankData = await csRank.json();
     
@@ -43,40 +40,42 @@ module.exports = {
     const exampleEmbed = new EmbedBuilder()
       .setColor(generateRandomHexColor())
       .setTitle(`CS:GO Stats of ${csProfileData.response.players[0].personaname}`)
-      .setAuthor({
+    .setAuthor({
         name: csProfileData.response.players[0].personaname,
         iconURL: csProfileData.response.players[0].avatar,
         url: csProfileData.response.players[0].profileurl
       })
-    .setThumbnail(rankData[0])
-      .setDescription("CS:GO Player Info")
+    .setThumbnail(rankData.ranks[0])
+      .setDescription("CS:GO Player Info. Join Our Server to suggest any other information that you may want to see. Join link: https://discord.gg/eP9A8f4vwh")
       .addFields(
         {
-          name: "Total Kills",
-          value: `${csgoStatsData.playerstats.stats[0].value}`,
+          name: "<:kd:1117907545823117433>  K/D",
+          value: "┕ ` " + rankData.kd + " `",
           inline: true,
         },
         {
-          name: "Total Deaths",
-          value: `${csgoStatsData.playerstats.stats[1].value}`,
+          name: "<:hltv:1117909449856794644>  HLTV Rating",
+          value: "┕ ` " + rankData.rating + " `",
           inline: true,
         },
         {
-          name: "K/D",
-          value: `${(
-            csgoStatsData.playerstats.stats[0].value /
-            csgoStatsData.playerstats.stats[1].value
-          ).toFixed(2)}`,
+          name: "<:wr:1117907984291471502>  Win Rate",
+          value: "┕ ` " + rankData.win_rate + " `",
           inline: true,
         },
         {
-          name: "Total Bomb Plants",
-          value: `${csgoStatsData.playerstats.stats[3].value}`,
+          name: "<:hs:1117907700441956482>  HS Rate",
+          value:"┕ ` " + rankData.hs_rate + " `",
           inline: true,
         },
         {
-          name: "Total Bomb Defused ",
-          value: `${csgoStatsData.playerstats.stats[4].value}`,
+          name: "<:mostM:1117908621020368916>  Most Played Maps",
+          value: "┕ ` " + rankData.mapMost + " `",
+          inline: true,
+        },
+        {
+          name: "<:lessM:1117908777220460645>  Least Played Maps",
+          value: "┕ ` " + rankData.mapLeast + " `",
           inline: true,
         }
       )
@@ -88,5 +87,11 @@ module.exports = {
       .setTimestamp();
 
     await interaction.editReply({ embeds: [exampleEmbed]});
+     
+   }
+    catch(err) {
+      await interaction.editReply("Sorry!! I couldn't find the profile data. Join support server to report the error: https://discord.gg/eP9A8f4vwh");
+    }
+    
   },
 };
