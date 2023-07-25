@@ -59,6 +59,11 @@ module.exports = {
           inline: true,
         },
         {
+          name: "<:dmg:1118251203416031322>  ADR",
+          value: "┕ ` " + rankData.adr + " `",
+          inline: true,
+        },
+        {
           name: "<:wr:1117907984291471502>  Win Rate",
           value: "┕ ` " + rankData.win_rate + " `",
           inline: true,
@@ -69,13 +74,23 @@ module.exports = {
           inline: true,
         },
         {
-          name: "<:mostM:1117908621020368916>  Most Played Maps",
+          name: "<:mostM:1117908621020368916>  Most Maps",
           value: "┕ ` " + rankData.mapMost + " `",
           inline: true,
         },
         {
-          name: "<:lessM:1117908777220460645>  Least Played Maps",
+          name: "<:lessM:1117908777220460645>  Least Maps",
           value: "┕ ` " + rankData.mapLeast + " `",
+          inline: true,
+        },
+        {
+          name: "<:rifle:1118251600864104609>  Most Weapon",
+          value: "┕ ` " + rankData.weaponMost + " `",
+          inline: true,
+        },
+        {
+          name: "<:gun:1118252025633833030>  Least Weapon",
+          value: "┕ ` " + rankData.weaponLeast + " `",
           inline: true,
         }
       )
