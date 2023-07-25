@@ -17,7 +17,8 @@
     "fastify": "^4.17.0",
     "handlebars": "^4.7.7",
     "minestat": "^1.0.5",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.0",
+    "openai": "^3.3.0"
   },
   "engines": {
     "node": "16.6.1"
