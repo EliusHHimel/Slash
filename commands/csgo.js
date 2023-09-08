@@ -31,7 +31,7 @@ module.exports = {
       }
 
       const csRank = await fetch(
-        `https://csrank.eliushhimel.repl.co/players/${si}`
+        `https://csgostats-api.vercel.app/players/${si}`
       );
       const rankData = await csRank.json();
 
