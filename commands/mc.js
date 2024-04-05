@@ -19,6 +19,8 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
+     await interaction.deferReply();
+    
     const ip = interaction.options.getString("ip");
     const url = "https://api.mcstatus.io/v2/status/java/" + ip;
     const getServerStatus = await fetch(url);
@@ -59,6 +61,6 @@ module.exports = {
           "https://cdn.discordapp.com/attachments/690148635375435825/1054266142283284510/Slash.png",
       });
 
-    await interaction.reply({ embeds: [serverEmbed] });
+    await interaction.editReply({ embeds: [serverEmbed] });
   },
 };
